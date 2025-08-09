@@ -1,3 +1,13 @@
+/**
+ *
+ *
+    Contract features:
+    6 month vesting locker for each ERC20 token
+    https://github.com/roberts/locker
+    https://x.com/DrewRoberts
+    https://t.me/BearFund
+ */
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
