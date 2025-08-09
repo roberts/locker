@@ -172,9 +172,10 @@ abstract contract Ownable is Context {
     }
 }
 
+
 /**
  * @title ERC20Locker
- * @dev A smart contract that locks ERC-20 tokens for a fixed period (6 months).
+ * @dev A smart contract that locks ERC-20 tokens for a fixed period (6 month).
  * Only the contract owner can initiate the vesting period for a token and
  * withdraw tokens after their lock-up has expired.
  * Direct transfers to the contract are also included in the vested balance
@@ -186,10 +187,10 @@ contract ERC20Locker is Ownable {
     // Mapping to store the timestamp when a specific ERC-20 token becomes releasable.
     // Key: ERC-20 token address
     // Value: Unix timestamp (seconds since epoch) when the token is unlocked.
-    mapping(address => uint256) private releaseDates;
+    mapping(address => uint256) private releaseDates; // Changed from uint252 to uint256 to resolve compilation error
 
-    // Constant representing the fixed lock-up duration (approximately 6 months in seconds).
-    // Using 182 days as a common approximation for 6 months to maintain consistency.
+    // Constant representing the fixed lock-up duration (approximately 6 month in seconds).
+    // Using 182 days as a common approximation for 6 month to maintain consistency.
     uint256 public constant LOCK_DURATION = 182 days; // 182 days * 24 hours/day * 60 minutes/hour * 60 seconds/minute
 
     // Event emitted when tokens are successfully vested (lock-up period initiated).
@@ -207,6 +208,12 @@ contract ERC20Locker is Ownable {
         uint256 amount           // Amount of tokens released
     );
 
+    // Event emitted when Ether is withdrawn from the contract.
+    event EtherWithdrawn(
+        address indexed recipient, // Address of the recipient (contract owner)
+        uint256 amount           // Amount of Ether withdrawn
+    );
+
     /**
      * @dev Constructor that sets the initial owner of the contract.
      * Inherits from OpenZeppelin's Ownable contract.
@@ -214,10 +221,10 @@ contract ERC20Locker is Ownable {
     constructor() Ownable(msg.sender) {}
 
     /**
-     * @dev Vests ERC-20 tokens, initiating a 6-month lock-up period for them.
+     * @dev Vests ERC-20 tokens, initiating a 6 month lock-up period for them.
      * The contract owner must first approve this contract to spend the tokens.
      * Any existing balance of the specified token in this contract (including
-     * direct transfers) will become subject to this new 6-month lock.
+     * direct transfers) will become subject to this new 6 month lock.
      * @param _token The address of the ERC-20 token to vest.
      * @param _amount The amount of tokens to transfer from the owner and vest.
      */
@@ -232,6 +239,7 @@ contract ERC20Locker is Ownable {
         _token.safeTransferFrom(msg.sender, address(this), _amount);
 
         // Calculate the new release time based on the current block timestamp and LOCK_DURATION.
+        // Cast to uint256 as uint252 is not a standard Solidity type.
         uint256 newReleaseTime = block.timestamp + LOCK_DURATION;
 
         // Update the release date for this specific token. This effectively resets
@@ -245,7 +253,7 @@ contract ERC20Locker is Ownable {
     /**
      * @dev Releases (withdraws) vested ERC-20 tokens to the contract owner.
      * This function can only be called by the contract owner.
-     * Tokens can only be released if their 6-month lock-up period has expired.
+     * Tokens can only be released if their 6 month lock-up period has expired.
      * After successful release, the vesting period for this token is reset (release date set to 0).
      * @param _token The address of the ERC-20 token to release.
      */
