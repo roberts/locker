@@ -135,4 +135,24 @@ contract ERC20Locker is Ownable {
         require(address(_token) != address(0), "ERC20Locker: Invalid token address");
         return releaseDates[address(_token)];
     }
+
+    /**
+     * @dev Sends any native currency (ETH) accidentally sent to the contract back to the owner.
+     * This function can only be called by the contract owner.
+     * Uses a low-level call to ensure gas forwarding is handled correctly.
+     */
+    function withdrawStuckETH() public onlyOwner {
+        uint256 ethBalance = address(this).balance;
+        // Ensure there is ETH to withdraw.
+        require(ethBalance > 0, "ERC20Locker: No ETH to withdraw");
+
+        // Perform a low-level call to send ETH to the owner.
+        // This method is preferred over `transfer` or `send` as it forwards all available gas.
+        (bool success, ) = payable(owner()).call{value: ethBalance}("");
+        // Ensure the transfer was successful.
+        require(success, "ERC20Locker: ETH withdrawal failed");
+
+        // Emit an event to log the ETH withdrawal.
+        emit EtherWithdrawn(owner(), ethBalance);
+    }
 }
