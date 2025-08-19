@@ -100,11 +100,13 @@ If native currency (ETH) is accidentally sent to the contract:
 
 * **Auditing:** For any production deployment, a **professional security audit** of this contract is highly recommended to identify and mitigate potential vulnerabilities.
 
-## 📜 Base Chain Ccontract 4 Airdrops
+## 📜 Base Chain Contract 4 Airdrops
+
+### 7 Days
 
 ### 1 Month
 
-### 6 Month
+### 6 Months
 - [0x5f24CA85A2d00F51d32a2a4CA3e8587740dA76bc](https://basescan.org/address/0x5f24ca85a2d00f51d32a2a4ca3e8587740da76bc#code)
 - [0x4AeA93dB1697746723fFEa63d4a2175A6d4c2448](https://basescan.org/address/0x4aea93db1697746723ffea63d4a2175a6d4c2448#code)
 - [0x01Ea23e1640F7759Cd95CF4F7E6CA81a04B42dB6](https://basescan.org/address/0x01ea23e1640f7759cd95cf4f7e6ca81a04b42db6#code)
