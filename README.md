@@ -68,7 +68,7 @@ To withdraw vested tokens after the lock-up period:
 
    * **Locker Contract:** `ERC20_LOCKER_CONTRACT_ADDRESS.release(IERC20_TOKEN_ADDRESS)`
 
-   * This will transfer all tokens of that type from the contract to the `owner`'s address and reset the `releaseDate` for that token to 0.
+   * This will transfer all tokens of that type from the contract to the `owner`'s address and reset the `releaseDate` for that token.
 
 ### Withdrawing Stuck ETH
 
@@ -98,8 +98,6 @@ If native currency (ETH) is accidentally sent to the contract:
 
 * **No Reentrancy:** The `release` function follows the **Checks-Effects-Interactions** pattern and internally utilizes OpenZeppelin's `SafeERC20` library to prevent common reentrancy vulnerabilities.
 
-* **Auditing:** For any production deployment, a **professional security audit** of this contract is highly recommended to identify and mitigate potential vulnerabilities.
-
 ## 📜 Base Chain Contract 4 Airdrops
 
 ### 7 Days
@@ -107,11 +105,6 @@ If native currency (ETH) is accidentally sent to the contract:
 ### 1 Month
 
 ### 6 Months
-- [0x5f24CA85A2d00F51d32a2a4CA3e8587740dA76bc](https://basescan.org/address/0x5f24ca85a2d00f51d32a2a4ca3e8587740da76bc#code)
-- [0x4AeA93dB1697746723fFEa63d4a2175A6d4c2448](https://basescan.org/address/0x4aea93db1697746723ffea63d4a2175a6d4c2448#code)
-- [0x01Ea23e1640F7759Cd95CF4F7E6CA81a04B42dB6](https://basescan.org/address/0x01ea23e1640f7759cd95cf4f7e6ca81a04b42db6#code)
-- [0xE70D1D67A36d2eb51AA75CF8A37A495EFed96585](https://basescan.org/address/0xe70d1d67a36d2eb51aa75cf8a37a495efed96585#code)
-- [0x9200991Ab56ddc082b6b662fBb3794D119e66A02](https://basescan.org/address/0x9200991ab56ddc082b6b662fbb3794d119e66a02#code)
 
 ### 1 Year
 
