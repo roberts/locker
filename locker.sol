@@ -185,8 +185,8 @@ abstract contract Ownable is Context {
 
 /**
  * @title ERC20Locker
- * @dev A smart contract that locks ERC-20 tokens for a fixed period (6 month).
- * Only the contract owner can initiate the vesting period for a token and
+ * @dev This smart contract locks ERC-20 tokens for a fixed period.
+ * Only the contract owner can initiate the vesting period for a token &
  * withdraw tokens after their lock-up has expired.
  * Direct transfers to the contract are also included in the vested balance
  * once the 'vest' function is called for that token.
@@ -197,7 +197,7 @@ contract ERC20Locker is Ownable {
     // Mapping to store the timestamp when a specific ERC-20 token becomes releasable.
     mapping(address => uint256) private releaseDates;
 
-    // Constant representing the fixed lock-up duration (approximately 6 months).
+    // Constant representing the fixed lock-up duration (6 months).
     uint256 public constant LOCK_DURATION = 182 days;
 
     // Event emitted when tokens are successfully vested (lock-up period initiated).
